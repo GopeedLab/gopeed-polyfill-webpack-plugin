@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const test = require('ava');
 const webpack = require('p-webpack');
-const NodePolyfillPlugin = require('./index.js');
+const GopeedPolyfillPlugin = require('./index.js');
 
 test('main', async t => {
 	await webpack({
@@ -13,7 +13,7 @@ test('main', async t => {
 			filename: '1.js',
 		},
 		plugins: [
-			new NodePolyfillPlugin({
+			new GopeedPolyfillPlugin({
 				excludeAliases: ['console'],
 			}),
 		],
@@ -38,7 +38,7 @@ test('includeAliases', async t => {
 			filename: '2.js',
 		},
 		plugins: [
-			new NodePolyfillPlugin({
+			new GopeedPolyfillPlugin({
 				includeAliases: ['console'],
 			}),
 		],
@@ -54,7 +54,7 @@ test('includeAliases', async t => {
 });
 
 test('includeAliases and excludeAliases used at the same time', t => {
-	t.throws(() => new NodePolyfillPlugin({
+	t.throws(() => new GopeedPolyfillPlugin({
 		includeAliases: ['console'],
 		excludeAliases: ['crypto'],
 	}), {instanceOf: Error});
