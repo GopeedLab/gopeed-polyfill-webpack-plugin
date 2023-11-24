@@ -1,12 +1,11 @@
 import {type MergeExclusive} from 'type-fest';
 import {type Compiler} from 'webpack';
 
-declare namespace NodePolyfillPlugin {
+declare namespace GopeedPolyfillPlugin {
 	export type Alias =
 		| 'assert'
 		| 'buffer'
 		| 'Buffer'
-		| 'console'
 		| 'constants'
 		| 'crypto'
 		| 'domain'
@@ -15,7 +14,6 @@ declare namespace NodePolyfillPlugin {
 		| 'https'
 		| 'os'
 		| 'path'
-		| 'process'
 		| 'punycode'
 		| 'querystring'
 		| 'stream'
@@ -50,10 +48,10 @@ declare namespace NodePolyfillPlugin {
 	export type Options = MergeExclusive<IncludeOptions, ExcludeOptions>;
 }
 
-declare class NodePolyfillPlugin {
-	constructor(options?: NodePolyfillPlugin.Options);
+declare class GopeedPolyfillPlugin {
+	constructor(options?: GopeedPolyfillPlugin.Options);
 
 	apply(compiler: InstanceType<typeof Compiler>): void;
 }
 
-export = NodePolyfillPlugin;
+export = GopeedPolyfillPlugin;

@@ -35,7 +35,7 @@ function createAliasFilter({includeAliases, excludeAliases}) {
 	return object => excludeKeys(object, excludeAliases);
 }
 
-module.exports = class NodePolyfillPlugin {
+module.exports = class GopeedPolyfillPlugin {
 	constructor(options = {}) {
 		this.options = {
 			excludeAliases: [],
@@ -53,7 +53,6 @@ module.exports = class NodePolyfillPlugin {
 
 		compiler.options.plugins.push(new compiler.webpack.ProvidePlugin(filter({
 			Buffer: [require.resolve('buffer/'), 'Buffer'],
-			console: require.resolve('console-browserify'),
 			process: require.resolve('process/browser'),
 		})));
 
@@ -61,12 +60,11 @@ module.exports = class NodePolyfillPlugin {
 			...filter({
 				assert: require.resolve('assert/'),
 				buffer: require.resolve('buffer/'),
-				console: require.resolve('console-browserify'),
 				constants: require.resolve('constants-browserify'),
-				crypto: require.resolve('crypto-browserify'),
+				crypto: require.resolve('./modules/crypto/index.js'),
 				domain: require.resolve('domain-browser'),
 				events: require.resolve('events/'),
-				http: require.resolve('stream-http'),
+				http: require.resolve('./modules/http/index.js'),
 				https: require.resolve('https-browserify'),
 				os: require.resolve('os-browserify/browser'),
 				path: require.resolve('path-browserify'),
@@ -87,7 +85,7 @@ module.exports = class NodePolyfillPlugin {
 				tty: require.resolve('tty-browserify'),
 				url: require.resolve('url/'),
 				util: require.resolve('util/'),
-				vm: require.resolve('vm-browserify'),
+				vm: require.resolve('./modules/vm/index.js'),
 				zlib: require.resolve('browserify-zlib'),
 			}),
 			...compiler.options.resolve.fallback,
