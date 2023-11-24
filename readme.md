@@ -37,7 +37,7 @@ Type: `object`
 
 #### excludeAliases
 
-By default, the modules that were polyfilled in Webpack 4 are mirrored over. However, if you don't want a module like `console` to be polyfilled you can specify alises to be skipped here.
+By default, the modules that were polyfilled in Webpack 4 are mirrored over. However, if you don't want a module like `process` to be polyfilled you can specify alises to be skipped here.
 
 ```js
 const GopeedPolyfillPlugin = require('gopeed-polyfill-webpack-plugin');
@@ -46,7 +46,7 @@ module.exports = {
 	// Other rules...
 	plugins: [
 		new GopeedPolyfillPlugin({
-			excludeAliases: ['console']
+			excludeAliases: ['process']
 		})
 	]
 };
@@ -54,7 +54,7 @@ module.exports = {
 
 #### includeAliases
 
-Alternatively, you can choose to only include certain aliases. For example, you can only have `console` polyfilled.
+Alternatively, you can choose to only include certain aliases. For example, you can only have `process` polyfilled.
 
 ```js
 const GopeedPolyfillPlugin = require('gopeed-polyfill-webpack-plugin');
@@ -63,7 +63,7 @@ module.exports = {
 	// Other rules...
 	plugins: [
 		new GopeedPolyfillPlugin({
-			includeAliases: ['console']
+			includeAliases: ['process']
 		})
 	]
 };
