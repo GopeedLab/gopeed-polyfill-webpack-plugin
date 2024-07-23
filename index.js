@@ -51,19 +51,29 @@ module.exports = class GopeedPolyfillPlugin {
 	apply(compiler) {
 		const filter = createAliasFilter(this.options);
 
-		compiler.options.plugins.push(new compiler.webpack.ProvidePlugin(filter({
-			Buffer: [require.resolve('buffer/'), 'Buffer'],
-			process: require.resolve('process/browser'),
-		})));
+		compiler.options.plugins.push(
+			new compiler.webpack.NormalModuleReplacementPlugin(/^node:/, resource => {
+				resource.request = resource.request.replace(/^node:/, '');
+			}),
+			new compiler.webpack.ProvidePlugin(filter({
+				Buffer: [require.resolve('buffer/'), 'Buffer'],
+				process: require.resolve('process/browser'),
+				TextEncoder: [require.resolve('text-encoding-utf-8'), 'TextEncoder'],
+				TextDecoder: [require.resolve('text-encoding-utf-8'), 'TextDecoder'],
+			})),
+		);
 
 		compiler.options.resolve.fallback = {
 			...filter({
 				assert: require.resolve('assert/'),
 				buffer: require.resolve('buffer/'),
 				constants: require.resolve('constants-browserify'),
-				crypto: require.resolve('./modules/crypto/index.js'),
+				crypto: require.resolve('crypto-browserify'),
+				/* eslint-disable-next-line camelcase */
+				child_process: false,
 				domain: require.resolve('domain-browser'),
 				events: require.resolve('events/'),
+				fs: false,
 				http: require.resolve('./modules/http/index.js'),
 				https: require.resolve('https-browserify'),
 				os: require.resolve('os-browserify/browser'),
@@ -83,7 +93,7 @@ module.exports = class GopeedPolyfillPlugin {
 				sys: require.resolve('util/'),
 				timers: require.resolve('timers-browserify'),
 				tty: require.resolve('tty-browserify'),
-				url: require.resolve('url/'),
+				url: require.resolve('./modules/url/index.js'),
 				util: require.resolve('util/'),
 				vm: require.resolve('./modules/vm/index.js'),
 				zlib: require.resolve('browserify-zlib'),
