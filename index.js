@@ -61,8 +61,8 @@ module.exports = class GopeedPolyfillPlugin {
 				TextEncoder: [require.resolve('text-encoding-utf-8'), 'TextEncoder'],
 				TextDecoder: [require.resolve('text-encoding-utf-8'), 'TextDecoder'],
 				EventTarget: [require.resolve('event-target-shim'), 'EventTarget'],
-				atob:[require.resolve('base-64'), 'decode'],
-				btoa:[require.resolve('base-64'), 'encode'],
+				atob: [require.resolve('base-64'), 'decode'],
+				btoa: [require.resolve('base-64'), 'encode'],
 			})),
 		);
 
