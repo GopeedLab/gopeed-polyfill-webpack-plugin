@@ -71,6 +71,7 @@ module.exports = class GopeedPolyfillPlugin {
 				assert: require.resolve('assert/'),
 				buffer: require.resolve('buffer/'),
 				constants: require.resolve('constants-browserify'),
+				console: require.resolve('console-browserify'),
 				crypto: require.resolve('crypto-browserify'),
 				/* eslint-disable-next-line camelcase */
 				child_process: false,

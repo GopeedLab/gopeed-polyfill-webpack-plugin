@@ -1,6 +1,6 @@
 {
 	"name": "gopeed-polyfill-webpack-plugin",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Polyfill Node.js core modules in Webpack.",
 	"repository": "GopeedLab/gopeed-polyfill-webpack-plugin",
 	"author": {
