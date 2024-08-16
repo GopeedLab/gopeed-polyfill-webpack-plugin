@@ -52,7 +52,7 @@
 		"timers-browserify": "^2.0.12",
 		"tty-browserify": "^0.0.1",
 		"type-fest": "^4.4.0",
-		"url": "^0.11.3",
+		"url": "github:mischnic/node-url#c4cb4cca5480dd7fb748d8b56a3882ac8e54fbaf",
 		"util": "^0.12.5",
 		"xtend": "^4.0.2"
 	},

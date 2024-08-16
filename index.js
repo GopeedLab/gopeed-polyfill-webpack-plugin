@@ -97,7 +97,7 @@ module.exports = class GopeedPolyfillPlugin {
 				sys: require.resolve('util/'),
 				timers: require.resolve('timers-browserify'),
 				tty: require.resolve('tty-browserify'),
-				url: require.resolve('./modules/url/index.js'),
+				url: require.resolve('url/'),
 				util: require.resolve('util/'),
 				vm: require.resolve('./modules/vm/index.js'),
 				zlib: require.resolve('browserify-zlib'),
