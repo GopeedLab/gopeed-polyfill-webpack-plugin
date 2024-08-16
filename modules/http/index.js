@@ -2,7 +2,7 @@ var ClientRequest = require("./lib/request");
 var response = require("./lib/response");
 var extend = require("xtend");
 var statusCodes = require("builtin-status-codes");
-var url = require("url");
+var url = require("url/");
 
 var http = exports;
 

@@ -22,7 +22,7 @@ function getPathFromURLPosix(url) {
 	return decodeURIComponent(pathname);
 }
 
-function fileURLToPath(path) {
+url.fileURLToPath = function (path) {
 	if (typeof path === "string") {
 		path = url.parse(path);
 	} else if (!isURLInstance(path)) {
@@ -35,6 +35,6 @@ function fileURLToPath(path) {
 		throw new TypeError("The URL must be of scheme file");
 	}
 	return getPathFromURLPosix(path);
-}
+};
 
-module.exports = { ...url, fileURLToPath };
+module.exports = url;
