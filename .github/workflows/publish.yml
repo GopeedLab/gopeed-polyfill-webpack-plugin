@@ -6,19 +6,21 @@ on:
     types: [published]
 
 permissions:
-  contents: write
+  contents: read
+  id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18
-      - run: |
-          npm install
-          # set npm token
-          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-          npm publish
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+      - run: npm install --global npm@11
+      - run: npm install
+      - run: npm test
+      - run: npm publish

@@ -106,3 +106,7 @@ module.exports = {
 - `util`
 - `vm`
 - `zlib`
+
+The `url` and `node:url` modules preserve the legacy URL helpers and export
+`URL` and `URLSearchParams` from the host runtime. The runtime must provide
+these globals, as Gopeed does.

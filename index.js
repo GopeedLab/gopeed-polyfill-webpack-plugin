@@ -50,6 +50,15 @@ module.exports = class GopeedPolyfillPlugin {
 
 	apply(compiler) {
 		const filter = createAliasFilter(this.options);
+		const urlPolyfill = require.resolve('./modules/url/index.js');
+
+		if (filter({url: true}).url) {
+			// A fallback alone is bypassed when the url package is already installed.
+			const aliases = compiler.options.resolve.alias || {};
+			compiler.options.resolve.alias = Array.isArray(aliases)
+				? [...aliases, {name: 'url', alias: urlPolyfill, onlyModule: true}]
+				: {...aliases, url$: aliases.url$ ?? urlPolyfill};
+		}
 
 		compiler.options.plugins.push(
 			new compiler.webpack.NormalModuleReplacementPlugin(/^node:/, resource => {
@@ -97,7 +106,7 @@ module.exports = class GopeedPolyfillPlugin {
 				sys: require.resolve('util/'),
 				timers: require.resolve('timers-browserify'),
 				tty: require.resolve('tty-browserify'),
-				url: require.resolve('url/'),
+				url: urlPolyfill,
 				util: require.resolve('util/'),
 				vm: require.resolve('./modules/vm/index.js'),
 				zlib: require.resolve('browserify-zlib'),
